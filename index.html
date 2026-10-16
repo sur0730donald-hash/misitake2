@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071018">
+  <title>N.E.X.U.S | AI Study Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">N.E.X.U.S <span>● ONLINE</span></div>
+  <div id="clock">読み込み中...</div>
+  <button id="settingsOpen" aria-label="設定">⚙</button>
+</header>
+
+<main class="layout" id="layout">
+  <aside class="sidebar">
+    <section class="panel">
+      <h2>▦ System Stats</h2>
+      <div class="panel-body">
+        <p>Browser Status <b>ONLINE</b></p>
+        <div class="meter"><i></i></div>
+        <div class="stats">
+          <div>Messages<b id="messageCount">0</b></div>
+          <div>Mode<b id="modeStatus">TEXT</b></div>
+          <div>Files<b id="fileCount">0</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>☁ Weather</h2>
+      <div class="panel-body">
+        <div class="temperature" id="temperature">--.-°C</div>
+        <p id="weatherText">天気情報は未接続</p>
+        <small>天気APIは後から追加できます。</small>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>▣ Camera / Files</h2>
+      <div class="panel-body">
+        <label class="upload">
+          ＋ ファイル・写真を選択
+          <input id="fileInput" type="file"
+            accept="image/*,.pdf,.txt" multiple hidden>
+        </label>
+        <div id="fileList"></div>
+        <button id="cameraButton">カメラを開く</button>
+        <video id="camera" autoplay playsinline muted hidden></video>
+        <small>初期版ではファイルの一覧表示まで対応。</small>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>◷ System Uptime</h2>
+      <div class="panel-body">
+        <div class="uptime" id="uptime">00:00:00</div>
+        <small>ページを開いてからの時間</small>
+      </div>
+    </section>
+  </aside>
+
+  <section class="center" id="center">
+    <div class="core-header">
+      <div class="orb" id="orb">
+        <div class="ring ring1"></div>
+        <div class="ring ring2"></div>
+        <div class="ring ring3"></div>
+        <div class="core-ball"><span>•••••</span></div>
+      </div>
+      <div class="core-title">
+        <h1>N.E.X.U.S</h1>
+        <p>YOUR PERSONAL AI STUDY ASSISTANT</p>
+      </div>
+    </div>
+
+    <div id="captions" aria-live="polite">
+      こんにちは！質問を入力して勉強を始めよう。
+    </div>
+
+    <section id="visualPanel" class="visual-panel" hidden>
+      <div class="visual-heading">
+        <span>LEARNING VISUALIZATION</span>
+        <button id="closeVisual">閉じる ×</button>
+      </div>
+      <div id="visualContent"></div>
+    </section>
+
+    <div class="controls">
+      <button id="voiceMode">🎙<small>音声会話</small></button>
+      <button id="textMode" class="active">⌨<small>文字入力</small></button>
+      <button id="stopSpeech">■<small>音声停止</small></button>
+    </div>
+    <div id="voiceStatus">音声会話はボタンを押して開始</div>
+  </section>
+
+  <aside class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <h2>Conversation</h2>
+      <button id="clearChat">Clear</button>
+      <button id="saveHistory">履歴保存</button>
+    </div>
+    <div id="messages" class="messages">
+      <article class="assistant">
+        <b>N.E.X.U.S</b>
+        <p>こんにちは！高校の勉強を手伝うよ。質問を送ってね。</p>
+      </article>
+    </div>
+    <form id="chatForm" class="chat-form">
+      <textarea id="chatInput" rows="1" maxlength="6000"
+        placeholder="質問を入力…"></textarea>
+      <button type="submit">➤</button>
+    </form>
+    <small class="chat-note">
+      AIの回答は、教科書や先生の説明も確認してね。
+    </small>
+  </aside>
+</main>
+
+<dialog id="settingsDialog">
+  <form method="dialog" id="settingsForm">
+    <div class="settings-heading">
+      <h2>設定</h2>
+      <button value="cancel">×</button>
+    </div>
+    <label>音声
+      <select id="voiceSelect">
+        <option value="">端末の既定音声</option>
+      </select>
+    </label>
+    <label>読み上げ速度 <span id="speedValue">1.0x</span>
+      <input id="speechRate" type="range"
+        min="0.7" max="1.5" step="0.1" value="1">
+    </label>
+    <label>文字サイズ <span id="fontValue">100%</span>
+      <input id="fontSize" type="range"
+        min="85" max="125" step="5" value="100">
+    </label>
+    <label>テーマ
+      <select id="themeSelect">
+        <option value="dark">ダークモード</option>
+        <option value="light">ライトモード</option>
+      </select>
+    </label>
+    <label class="check">
+      <input id="autoSpeak" type="checkbox" checked>
+      回答を自動で読み上げる
+    </label>
+    <button class="primary" value="cancel">保存して閉じる</button>
+  </form>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
