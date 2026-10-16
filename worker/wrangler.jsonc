@@ -1,0 +1,10 @@
+
+{
+  "$schema": "https://developers.cloudflare.com/workers/wrangler/configuration/schema.json",
+  "name": "nexus-ai-backend",
+  "main": "index.js",
+  "compatibility_date": "2026-10-16",
+  "ai": {
+    "binding": "AI"
+  }
+}
